@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 60% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 192 34% 30%;               /* #335c67 – צבע ראשי */
+    --primary-foreground: 0 0% 100%;      /* לבן */
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 210 60% 98%;
+    --muted-foreground: 215 16% 45%;
+
+    --accent: 210 100% 97%;
+    --accent-foreground: 210 90% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 60% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 192 34% 30%;                  /* אותו צבע כמו primary */
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 27%;
+    --sidebar-primary: 192 34% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 100% 97%;
+    --sidebar-accent-foreground: 210 90% 40%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 192 34% 30%;
+  }
+
+  .dark {
+    --background: 225 50% 5%;
+    --foreground: 210 60% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 60% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 60% 98%;
+
+    --primary: 192 34% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 25% 15%;
+    --secondary-foreground: 210 60% 98%;
+
+    --muted: 215 25% 15%;
+    --muted-foreground: 215 16% 65%;
+
+    --accent: 215 25% 15%;
+    --accent-foreground: 210 60% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 60% 98%;
+
+    --border: 215 25% 15%;
+    --input: 215 25% 15%;
+    --ring: 192 34% 30%;
+
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 214 32% 91%;
+    --sidebar-primary: 192 34% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 15%;
+    --sidebar-accent-foreground: 210 60% 98%;
+    --sidebar-border: 215 25% 15%;
+    --sidebar-ring: 192 34% 30%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
