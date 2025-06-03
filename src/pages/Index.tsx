@@ -97,35 +97,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-
-        {/* Side Panel */}
-        <div className="w-96 glass-effect border-l border-white/20 p-8 flex flex-col justify-center">
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-command-slate-800">יכולות המערכת</h3>
-            
-            <div className="space-y-4">
-              <div className="p-4 bg-white/50 rounded-xl border border-white/20">
-                <h4 className="font-semibold text-command-slate-700 mb-2">🎯 תיחום חכם</h4>
-                <p className="text-sm text-command-slate-600">ציור אזורים במפה עם בדיקת קשירות גרף גאוגרפי</p>
-              </div>
-              
-              <div className="p-4 bg-white/50 rounded-xl border border-white/20">
-                <h4 className="font-semibold text-command-slate-700 mb-2">🤖 אלגוריתם K-Center</h4>
-                <p className="text-sm text-command-slate-600">פיזור אופטימלי של כוחות על בסיס אלגוריתם מתקדם</p>
-              </div>
-              
-              <div className="p-4 bg-white/50 rounded-xl border border-white/20">
-                <h4 className="font-semibold text-command-slate-700 mb-2">📍 מעקב בזמן אמת</h4>
-                <p className="text-sm text-command-slate-600">ניטור מיקומים והתאמת פיזור דינמית</p>
-              </div>
-              
-              <div className="p-4 bg-white/50 rounded-xl border border-white/20">
-                <h4 className="font-semibold text-command-slate-700 mb-2">📊 ניתוח ודוחות</h4>
-                <p className="text-sm text-command-slate-600">היסטוריה מפורטת ואנליטיקה מתקדמת</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
