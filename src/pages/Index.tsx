@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Shield, Zap, Map, Users } from 'lucide-react';
 
+
 const Index = () => {
   const navigate = useNavigate();
 
