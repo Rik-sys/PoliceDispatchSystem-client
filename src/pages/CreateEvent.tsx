@@ -595,6 +595,11 @@ interface StrategicZone {
   longitude: number;
 }
 
+
+
+
+
+
 const CreateEvent = () => {
   const navigate = useNavigate();
 
@@ -624,64 +629,142 @@ const CreateEvent = () => {
       setStrategicZones(strategicZones);
     }
   };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  if (selectedArea.length < 4 || officerCount <= 0) {
+    alert("יש לבחור לפחות 4 נקודות ולפזר שוטרים");
+    return;
+  }
 
-    if (selectedArea.length < 4 || officerCount <= 0) {
-      alert("יש לבחור לפחות 4 נקודות ולפזר שוטרים");
-      return;
-    }
-
-    // ✨ הוספת האזורים האסטרטגיים לבקשה
-    const body = {
-      Name: eventData.name,  // ✨ שימוש באותיות גדולות כמו בקונטרולר
-      Description: eventData.description,
-      Priority: eventData.priority,
-      StartDate: eventData.startDate,
-      EndDate: eventData.endDate,
-      StartTime: eventData.startTime,
-      EndTime: eventData.endTime,
-      RequiredOfficers: officerCount,
-      SelectedArea: selectedArea.slice(0, 4),
-      StrategicZones: strategicZones.map(zone => ({  // ✨ הוספת האזורים האסטרטגיים
-        Latitude: zone.latitude,
-        Longitude: zone.longitude,
-        EventId: 0 // יוגדר על ידי השרת
-      }))
-    };
-
-    console.log('🚀 שולח בקשה ליצירת אירוע:', body); // ✨ לדיבוג
-
-    try {
-      const response = await fetch("https://localhost:7163/api/Event/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        
-        // ✨ הודעה משופרת עם פירוט
-        let message = `✅ נוצר אירוע עם ${result.OfficerCount || result.officerCount} שוטרים`;
-        
-        if (result.StrategicOfficers && result.StrategicOfficers > 0) {
-          message += `\n🎯 ${result.StrategicOfficers} שוטרים באזורים אסטרטגיים`;
-          message += `\n👮 ${result.RegularOfficers} שוטרים נוספים`;
-        }
-        
-        alert(message);
-        navigate("/operator-dashboard");
-      } else {
-        const error = await response.text();
-        alert("❌ שגיאה מהשרת:\n" + error);
-      }
-    } catch (err) {
-      console.error("❌ שגיאת רשת:", err);
-      alert("❌ שגיאת רשת");
-    }
+  const body = {
+    Name: eventData.name,
+    Description: eventData.description,
+    Priority: eventData.priority,
+    StartDate: eventData.startDate,
+    EndDate: eventData.endDate,
+    StartTime: eventData.startTime,
+    EndTime: eventData.endTime,
+    RequiredOfficers: officerCount,
+    SelectedArea: selectedArea.slice(0, 4),
+    StrategicZones: strategicZones.map(zone => ({
+      Latitude: zone.latitude,
+      Longitude: zone.longitude,
+      EventId: 0
+    }))
   };
+
+  // דיבוג - הדפסת המידע שנשלח
+  console.log('🚀 שולח בקשה ליצירת אירוע:');
+  console.log('📊 פרטי הבקשה:', {
+    officers: body.RequiredOfficers,
+    areaPoints: body.SelectedArea.length,
+    strategicZones: body.StrategicZones.length
+  });
+  
+  if (body.StrategicZones.length > 0) {
+    console.log('🎯 אזורים אסטרטגיים:');
+    body.StrategicZones.forEach((zone, index) => {
+      console.log(`   אזור ${index + 1}: (${zone.Latitude}, ${zone.Longitude})`);
+    });
+  }
+
+  try {
+    const response = await fetch("https://localhost:7163/api/Event/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      
+      console.log('✅ תגובה מהשרת:', result);
+      
+      let message = `✅ נוצר אירוע עם ${result.OfficerCount || result.officerCount} שוטרים`;
+      
+      if (result.StrategicOfficers && result.StrategicOfficers > 0) {
+        message += `\n🎯 ${result.StrategicOfficers} שוטרים באזורים אסטרטגיים`;
+        message += `\n👮 ${result.RegularOfficers} שוטרים נוספים`;
+      }
+      
+      // הצגת מידע דיבוג אם קיים
+      if (result.DebugInfo) {
+        console.log('🔍 מידע דיבוג:', result.DebugInfo);
+        if (result.DebugInfo.OriginalStrategicZones !== result.DebugInfo.FoundStrategicNodes) {
+          console.warn(`⚠️  אזהרה: נשלחו ${result.DebugInfo.OriginalStrategicZones} אזורים אך נמצאו רק ${result.DebugInfo.FoundStrategicNodes} צמתים`);
+        }
+      }
+      
+      alert(message);
+      navigate("/operator-dashboard");
+    } else {
+      const error = await response.text();
+      console.error('❌ שגיאה מהשרת:', error);
+      alert("❌ שגיאה מהשרת:\n" + error);
+    }
+  } catch (err) {
+    console.error("❌ שגיאת רשת:", err);
+    alert("❌ שגיאת רשת");
+  }
+};
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   if (selectedArea.length < 4 || officerCount <= 0) {
+  //     alert("יש לבחור לפחות 4 נקודות ולפזר שוטרים");
+  //     return;
+  //   }
+
+  //   // ✨ הוספת האזורים האסטרטגיים לבקשה
+  //   const body = {
+  //     Name: eventData.name,  // ✨ שימוש באותיות גדולות כמו בקונטרולר
+  //     Description: eventData.description,
+  //     Priority: eventData.priority,
+  //     StartDate: eventData.startDate,
+  //     EndDate: eventData.endDate,
+  //     StartTime: eventData.startTime,
+  //     EndTime: eventData.endTime,
+  //     RequiredOfficers: officerCount,
+  //     SelectedArea: selectedArea.slice(0, 4),
+  //     StrategicZones: strategicZones.map(zone => ({  // ✨ הוספת האזורים האסטרטגיים
+  //       Latitude: zone.latitude,
+  //       Longitude: zone.longitude,
+  //       EventId: 0 // יוגדר על ידי השרת
+  //     }))
+  //   };
+
+  //   console.log('🚀 שולח בקשה ליצירת אירוע:', body); // ✨ לדיבוג
+
+  //   try {
+  //     const response = await fetch("https://localhost:7163/api/Event/create", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(body)
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.json();
+        
+  //       // ✨ הודעה משופרת עם פירוט
+  //       let message = `✅ נוצר אירוע עם ${result.OfficerCount || result.officerCount} שוטרים`;
+        
+  //       if (result.StrategicOfficers && result.StrategicOfficers > 0) {
+  //         message += `\n🎯 ${result.StrategicOfficers} שוטרים באזורים אסטרטגיים`;
+  //         message += `\n👮 ${result.RegularOfficers} שוטרים נוספים`;
+  //       }
+        
+  //       alert(message);
+  //       navigate("/operator-dashboard");
+  //     } else {
+  //       const error = await response.text();
+  //       alert("❌ שגיאה מהשרת:\n" + error);
+  //     }
+  //   } catch (err) {
+  //     console.error("❌ שגיאת רשת:", err);
+  //     alert("❌ שגיאת רשת");
+  //   }
+  // };
 
   return (
    <div className="min-h-screen bg-gray-50 text-right" dir="rtl">

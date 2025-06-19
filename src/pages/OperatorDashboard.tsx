@@ -438,7 +438,7 @@ const OperatorDashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          {/* <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -448,9 +448,9 @@ const OperatorDashboard = () => {
                 <Calendar className="w-8 h-8 text-blue-600" />
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
           
-          <Card>
+          {/* <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -460,7 +460,7 @@ const OperatorDashboard = () => {
                 <Users className="w-8 h-8 text-green-600" />
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
           
           <Card>
             <CardContent className="p-6">
