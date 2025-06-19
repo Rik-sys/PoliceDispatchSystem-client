@@ -284,6 +284,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MapPin, Plus, Users, Calendar, Bell, Settings, User, Loader2, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import InteractiveMap from '@/components/InteractiveMap';
 
 const OperatorDashboard = () => {
   const navigate = useNavigate();
@@ -499,27 +500,22 @@ const OperatorDashboard = () => {
           <TabsContent value="control" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Map Area */}
-              <Card className="lg:col-span-2">
+<Card className="lg:col-span-3">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5" />
+                  <CardTitle className="flex items-center gap-2 dir=rtl">
+                    <MapPin className="w-5 h-5 dir=rtl" />
                     מפת בקרה
                   </CardTitle>
                   <CardDescription>הצגה ויזואלית של כל הפעילות הנוכחית</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="h-96 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <MapPin className="w-12 h-12 mx-auto mb-2" />
-                      <p>מפה אינטראקטיבית תוטמע כאן</p>
-                      <p className="text-sm">תציג שוטרים, אירועים וקריאות בזמן אמת</p>
-                    </div>
-                  </div>
-                </CardContent>
+                <CardContent className="p-0" style={{ height: "600px" }}>
+  <InteractiveMap />
+</CardContent>
+
               </Card>
 
               {/* Online Officers */}
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>שוטרים מחוברים</CardTitle>
                   <CardDescription>{onlineOfficers.length} שוטרים במערכת</CardDescription>
@@ -545,7 +541,7 @@ const OperatorDashboard = () => {
                     ))}
                   </div>
                 </CardContent>
-              </Card>
+              </Card> */}
             </div>
           </TabsContent>
 
