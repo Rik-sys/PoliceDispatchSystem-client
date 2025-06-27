@@ -608,7 +608,7 @@ const CreateEvent = () => {
     description: '',
     priority: '',
     startDate: '',
-    endDate: '',
+   // endDate: '',
     startTime: '',
     endTime: ''
   });
@@ -642,7 +642,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     Description: eventData.description,
     Priority: eventData.priority,
     StartDate: eventData.startDate,
-    EndDate: eventData.endDate,
+   // EndDate: eventData.endDate,
     StartTime: eventData.startTime,
     EndTime: eventData.endTime,
     RequiredOfficers: officerCount,
@@ -844,7 +844,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                         required
                       />
                     </div>
-                    <div>
+                    {/* <div>
                       <Label htmlFor="endDate">תאריך סיום</Label>
                       <Input
                         type="date"
@@ -853,7 +853,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                         onChange={(e) => setEventData({ ...eventData, endDate: e.target.value })}
                         required
                       />
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -902,7 +902,9 @@ const handleSubmit = async (e: React.FormEvent) => {
               <CardContent className="space-y-3">
                 <p><strong>שם:</strong> {eventData.name || '—'}</p>
                 <p><strong>עדיפות:</strong> {eventData.priority || '—'}</p>
-                <p><strong>תאריכים:</strong> {eventData.startDate} עד {eventData.endDate}</p>
+                <p><strong>תאריך:</strong> {eventData.startDate} </p>
+                {/* <p><strong>תאריך:</strong> {eventData.startDate} עד {eventData.endDate}</p> */}
+
                 <p><strong>שעות:</strong> {eventData.startTime} - {eventData.endTime}</p>
                 <p><strong>שוטרים שנבחרו:</strong> {officerCount}</p>
                 <p><strong>נקודות תיחום:</strong> {selectedArea.length}</p>

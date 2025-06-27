@@ -841,7 +841,7 @@ const CreateCall = () => {
                       />
                     </div>
                   </div>
-
+{/* 
                   <div>
                     <Label htmlFor="callTime">זמן הקריאה</Label>
                     <div className="flex items-center gap-2 mt-1">
@@ -854,7 +854,7 @@ const CreateCall = () => {
                         className="flex-1"
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Submit */}
